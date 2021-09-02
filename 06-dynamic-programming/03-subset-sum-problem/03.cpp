@@ -14,28 +14,23 @@ int main()
     rep(i, 0, n - 1) cin >> as[i];
     rep(i, 0, n - 1) cin >> bs[i];
 
-    int dp[n + 10][m + 10];
-    memset(dp, 0, sizeof(dp));
-    int seen[n + 10][m + 10];
-    memset(seen, 0, sizeof(seen));
-    seen[0][0] = 1;
+    vector<vector<int>> dp(n + 10, vector<int>(m + 10, -1));
+    dp[0][0] = 0;
 
     rep(i, 0, n - 1) rep(j, 0, m)
     {
-        seen[i + 1][j] |= seen[i][j];
-        dp[i + 1][j] = max(dp[i + 1][j], dp[i][j]);
-        if (i >= n - 1)
+        if (dp[i][j] < 0)
             continue;
+        dp[i + 1][j] = max(dp[i + 1][j], dp[i][j]);
 
-        int a = as[i], b = bs[i];
+        int a = as[i];
+        int b = bs[i];
         if (j + a < m)
-            seen[i + 1][j + a] |= seen[i][j];
-        if (j - a >= 0 && seen[i][j - a])
         {
-            dp[i + 1][j] = max(dp[i + 1][j], b + dp[i][j - a]);
+            dp[i + 1][j + a] = max(dp[i + 1][j + a], dp[i][j] + b);
         }
     }
 
-    int ans = seen[n - 1][m - 1] ? dp[n - 1][m - 1] : -1;
+    int ans = dp[n - 1][m - 1] < 0 ? -1 : dp[n - 1][m - 1];
     cout << ans << endl;
 }
