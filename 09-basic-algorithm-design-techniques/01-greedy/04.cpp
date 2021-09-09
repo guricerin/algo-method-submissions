@@ -17,21 +17,19 @@ int main()
     sort(all(as));
     sort(all(bs));
 
-    int j = 0;
+    vector<int> used(m, false);
     int ans = 0;
-    rep(i, 0, n)
+    rep(i, 0, n) rep(j, 0, m)
     {
-        if (j >= m)
-            break;
-        while (as[i] > bs[j])
+        if (used[j])
+            continue;
+
+        if (as[i] <= bs[j])
         {
-            j++;
-        }
-        if (j >= m)
+            ans++;
+            used[j] = 1;
             break;
-        ans++;
-        j++;
-        // cout << "ans:" << ans << " i:" << i << " j:" << j << endl;
+        }
     }
 
     cout << ans << endl;
