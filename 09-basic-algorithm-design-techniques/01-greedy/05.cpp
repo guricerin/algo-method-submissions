@@ -11,25 +11,14 @@ int main()
     int n;
     cin >> n;
 
-    // 3の倍数に近づけてから一気に3で割る。これを繰り返す。
-    int ans = 1;
-    while (n > 1)
+    int ans = 0;
+    while (n > 0)
     {
-        if (n == 2)
-        {
-            ans++;
-            break;
-        }
-        int rem = n % 3;
-        ans += rem;
-        n -= rem;
-        if (n <= 1)
-            break;
         if (n % 3 == 0)
-        {
             n /= 3;
-            ans++;
-        }
+        else
+            n--;
+        ans++;
     }
 
     cout << ans << endl;
