@@ -7,4 +7,5 @@ using namespace std;
 using i64 = int64_t;
 
 int main() {
+    cout << (740 - 100 - 70) / 3 << endl;
 }
