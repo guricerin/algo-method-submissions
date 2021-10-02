@@ -1,6 +1,6 @@
 # algo-method-submissions
 
-See: https://algo-method.com/
+See: https://algo-method.com/users/3570-7312
 
 ## commit message
 
