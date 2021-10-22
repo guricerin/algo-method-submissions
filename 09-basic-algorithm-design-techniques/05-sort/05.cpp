@@ -6,6 +6,7 @@ using namespace std;
 #define all(x) (x).begin(), (x).end()
 using i64 = int64_t;
 
+// http://vivi.dyndns.org/tech/cpp/random.html
 random_device rnd;
 mt19937 mt(rnd());
 
