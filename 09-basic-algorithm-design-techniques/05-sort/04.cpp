@@ -6,18 +6,35 @@ using namespace std;
 #define all(x) (x).begin(), (x).end()
 using i64 = int64_t;
 
+random_device rnd;
+mt19937 mt(rnd());
+
+// [0, n)
+int random(int n) {
+    return mt() % n;
+}
+
 vector<int> qsort(vector<int> xs) {
     if (xs.empty()) {
         return vector<int>();
     }
 
     vector<int> ls, rs;
-    int mid = xs.size() / 2;
+    int mid = random(xs.size());
     int pivot = xs[mid];
     rep(i, 0, xs.size()) {
         if (i == mid) continue;
-        if (xs[i] < pivot) ls.push_back(xs[i]);
-        if (xs[i] >= pivot) rs.push_back(xs[i]);
+
+        if (xs[i] < pivot) {
+            ls.push_back(xs[i]);
+        } else if (xs[i] > pivot) {
+            rs.push_back(xs[i]);
+        } else {
+            if (random(2))
+                ls.push_back(xs[i]);
+            else
+                rs.push_back(xs[i]);
+        }
     }
 
     ls = qsort(ls);
