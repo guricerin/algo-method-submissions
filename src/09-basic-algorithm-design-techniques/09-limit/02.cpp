@@ -10,12 +10,10 @@ int main() {
     int a, b;
     cin >> a >> b;
     int ans = 0;
-    if (a < 0) {
-        if (abs(a) < b)
-            ans = 1;
-        else
-            ans = 3;
-    } else if (a > b)
+    double c = (double)a / (double)b;
+    if (c <= -1)
+        ans = 3;
+    else if (c > 1)
         ans = 2;
     else
         ans = 1;
