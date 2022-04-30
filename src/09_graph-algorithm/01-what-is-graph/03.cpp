@@ -7,25 +7,25 @@ using namespace std;
 using i64 = int64_t;
 
 int main() {
-    int n, m, x;
-    cin >> n >> m >> x;
-    vector<set<int>> g(n);
+    int n, m;
+    cin >> n >> m;
+    vector<set<int>> g(n, set<int>());
     rep(i, 0, m) {
         int a, b;
         cin >> a >> b;
-        g[a].insert(b);
-        g[b].insert(a);
+        g[a].insert(b), g[b].insert(a);
     }
 
-    set<int> ans;
-    for (auto y : g[x]) {
-        cerr << "x friend: " << y << endl;
-        for (auto a : g[y]) {
-            cerr << y << " friend: " << a << endl;
-            if (g[x].find(a) == g[x].end() && a != x) {
-                ans.insert(a);
-            }
+    int cand = (int)1e9;
+    int maxsize = 0;
+    rrep(i, n - 1, 0) {
+        if (maxsize <= g[i].size()) {
+            maxsize = g[i].size();
+            cand = i;
         }
     }
-    cout << ans.size() << endl;
+    for (auto a : g[cand]) {
+        cout << a << " ";
+    }
+    cout << endl;
 }

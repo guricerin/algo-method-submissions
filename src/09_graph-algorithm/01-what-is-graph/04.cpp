@@ -7,22 +7,25 @@ using namespace std;
 using i64 = int64_t;
 
 int main() {
-    int n, x;
-    cin >> n >> x;
-    vector<int> as(n);
-    rep(i, 0, n - 1) {
-        cin >> as[i + 1];
+    int n, m, x;
+    cin >> n >> m >> x;
+    vector<set<int>> g(n);
+    rep(i, 0, m) {
+        int a, b;
+        cin >> a >> b;
+        g[a].insert(b);
+        g[b].insert(a);
     }
 
-    queue<int> que;
-    que.push(as[x]);
-    int ans = 0;
-    while (!que.empty()) {
-        int ne = que.front();
-        que.pop();
-        ans++;
-        if (ne == 0) break;
-        que.push(as[ne]);
+    set<int> ans;
+    for (auto y : g[x]) {
+        cerr << "x friend: " << y << endl;
+        for (auto a : g[y]) {
+            cerr << y << " friend: " << a << endl;
+            if (g[x].find(a) == g[x].end() && a != x) {
+                ans.insert(a);
+            }
+        }
     }
-    cout << ans << endl;
+    cout << ans.size() << endl;
 }
